@@ -1,0 +1,29 @@
+<div class="part">
+
+  <div class="vlad">
+    <div>Создать новый отдел</div>
+
+    <div *ngIf="errCreate!==null||errCreate!==undefined" style="color: red">{{errCreate}}</div>
+    <div *ngIf="errDivision!==null" style="color:red;">{{errDivision}}</div>
+    <mat-form-field>
+      <input matInput required [(ngModel)]="createdDivision.name" placeholder="Введите имя">
+    </mat-form-field>
+  <button mat-raised-button (click)="save(createdDivision)">add</button>
+    <div> Выбранное имя отдела</div>
+
+    <div *ngIf="errDivisionUpdate!==null" style="color:red;">{{errDivisionUpdate}}</div>
+    <div *ngIf="errUpdate!==null||errUpdate!==undefined" style="color: red">{{errUpdate}}</div>
+  <mat-form-field>
+    <input matInput required [(ngModel)]="selectedDivision.name" placeholder="Введите имя">
+  </mat-form-field>
+  </div>
+  <mat-action-list *ngFor="let division of allDivision" class="listOfEntity">
+    <button mat-list-item (click)="selectDivision(division)" class="buttonInList">{{division.id}} {{division.name}}
+    </button>
+  </mat-action-list>
+  <div>
+    <button mat-raised-button (click)="delete(selectedDivision)"> delete</button>
+    <button mat-raised-button (click)="update(selectedDivision)"> save</button>
+  </div>
+</div>
+

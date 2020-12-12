@@ -1,0 +1,27 @@
+<div class="part">
+  <div class="vlad">
+    <div>Создать новое имя этапа</div>
+    <div *ngIf="errCreate!==null||errCreate!==undefined" style="color: red">{{errCreate}}</div>
+    <div *ngIf="errName!==null" style="color: red">{{errName}}</div>
+    <mat-form-field>
+      <input matInput required [(ngModel)]="createdNameStage.name" placeholder="Введите имя">
+    </mat-form-field>
+    <button mat-raised-button (click)="save(createdNameStage)">add</button>
+
+    <div> Выбранное имя этапа</div>
+    <div *ngIf="errUpdate!==null||errUpdate!==undefined" style="color: red">{{errUpdate}}</div>
+    <div *ngIf="errNameUpdate!==null" style="color: red">{{errNameUpdate}}</div>
+    <mat-form-field>
+      <input matInput required [(ngModel)]="selectedNameStage.name" placeholder="Введите имя">
+    </mat-form-field>
+  </div>
+  <mat-action-list *ngFor="let nameStage of allNameStage" class="listOfEntity">
+    <button mat-list-item (click)="selectNameStage(nameStage)" class="buttonInList">{{nameStage.id}}
+      {{nameStage.name}}
+    </button>
+  </mat-action-list>
+  <div>
+    <button mat-raised-button (click)="delete(selectedNameStage)"> delete</button>
+    <button mat-raised-button (click)="update(selectedNameStage)"> save</button>
+  </div>
+</div>

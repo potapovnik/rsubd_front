@@ -1,0 +1,122 @@
+<div class="all">
+  <div class="part">
+    <mat-action-list *ngFor="let stage of allStage" class="listOfEntity">
+      <button mat-list-item (click)="selectStage(stage)" class="buttonInList">
+        {{stage.id}}-{{stage.name}}
+      </button>
+    </mat-action-list>
+  </div>
+  <div class="selected">
+    <div>Выбраный этап:</div>
+    <div *ngIf="errUpdateDate!==null" style="color: red">{{errUpdateDate}}</div>
+    <div *ngIf="errReadnis2 !==null || errReadnis2!==undefined" style="color: red;">{{errReadnis2}}</div>
+    <div *ngIf="errImportant2 !==null || errImportant2!==undefined" style="color: red;">{{errImportant2}}</div>
+    <mat-form-field>
+      <input matInput required [(ngModel)]="selectedStage.importance" placeholder="Введите важность(число)">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput required [(ngModel)]="selectedStage.readinessDegree"
+             placeholder="Введите степень готовности(в процентах)">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput type="date" [ngModel]="selectedStage.dateStart | date:'yyyy-MM-dd'"
+             (ngModelChange)="selectedStage.dateStart = $event" placeholder="Введите  время начала этпапа">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="date" [ngModel]="selectedStage.realDateEnd | date:'yyyy-MM-dd'"
+             (ngModelChange)="selectedStage.realDateEnd = $event" placeholder="Введите реальное время окончания">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="date" [ngModel]="selectedStage.dateEnd | date:'yyyy-MM-dd'"
+             (ngModelChange)="selectedStage.dateEnd = $event" placeholder="Введите планируемое время окончания">
+    </mat-form-field>
+
+    <div *ngIf="!checkNSSave">id имени этапа введено неверно</div>
+    <mat-form-field>
+      <mat-select placeholder="Выберете название этапа" [(ngModel)]="selectedStage.nameId">
+        <mat-option *ngFor="let item of allNameOfStage" [value]="item.id">
+          {{item.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div *ngIf="!checkTaskSave">id задания введено неверно</div>
+    <mat-form-field>
+      <mat-select placeholder="Выберете задачу" [(ngModel)]="selectedStage.taskId">
+        <mat-option *ngFor="let item of allTask" [value]="item.id">
+          {{item.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div *ngIf="!checkEmployeeSave">id рабочего введено неверно</div>
+    <mat-form-field>
+      <mat-select placeholder="Выберете ответственного за этап" [(ngModel)]="selectedStage.responsibleId">
+        <mat-option *ngFor="let item of allEmployee" [value]="item.id">
+          {{item.name}} {{item.surname}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div>
+      <button mat-raised-button (click)="delete(selectedStage)"> delete</button>
+      <button mat-raised-button (click)="update(selectedStage)"> save</button>
+    </div>
+  </div>
+  <div class="created">
+    <div>Создать этап:</div>
+    <div *ngIf="errCreateDate!==null" style="color: red">{{errCreateDate}}</div>
+    <div *ngIf="errReadnis1 !==null || errReadnis1!==undefined" style="color: red;">{{errReadnis1}}</div>
+    <div *ngIf="errImportant1 !==null || errImportant1!==undefined" style="color: red;">{{errImportant1}}</div>
+    <div *ngIf="errCreate !==null || errCreate!==undefined" style="color: red;">{{errCreate}}</div>
+
+    <mat-form-field>
+      <input matInput required [(ngModel)]="createdStage.importance" placeholder="Введите важность(число)">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput required [(ngModel)]="createdStage.readinessDegree"
+             placeholder="Введите степень готовности(в процентах)">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="date" required [(ngModel)]="createdStage.dateStart"
+             placeholder="Введите степень время начала этпапа">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput required type="date" [(ngModel)]="createdStage.realDateEnd"
+             placeholder="Введите реальное время окончания">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput required type="date" [(ngModel)]="createdStage.dateEnd"
+             placeholder="Введите планируемое время окончания">
+    </mat-form-field>
+
+    <div *ngIf="!checkNSCreate">id имени этапа введено неверно</div>
+    <mat-form-field>
+      <mat-select placeholder="Выберете название этапа" [(ngModel)]="createdStage.nameId">
+        <mat-option *ngFor="let item of allNameOfStage" [value]="item.id">
+          {{item.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div *ngIf="!checkTaskCreate">id задания введено неверно</div>
+    <mat-form-field>
+      <mat-select placeholder="Выберете задачу" [(ngModel)]="createdStage.taskId">
+        <mat-option *ngFor="let item of allTask" [value]="item.id">
+          {{item.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div *ngIf="!checkEmployeeCreate">id рабочего введено неверно</div>
+    <mat-form-field>
+      <mat-select placeholder="Выберете ответственного за этап" [(ngModel)]="createdStage.responsibleId">
+        <mat-option *ngFor="let item of allEmployee" [value]="item.id">
+          {{item.name}} {{item.surname}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button (click)="save(createdStage)"> add</button>
+  </div>
+
+</div>

@@ -1,0 +1,56 @@
+<div class="all">
+  <div class="part">
+    <mat-action-list *ngFor="let task of allTask" class="listOfEntity">
+      <button mat-list-item (click)="selectTask(task)" class="buttonInList">{{task.id}} {{task.name}}
+      </button>
+    </mat-action-list>
+  </div>
+  <div class="selected">
+    <div>Выбраное задание:</div>
+    <div *ngIf="errUpdate!==null||errUpdate!==undefined" style="color: red">{{errUpdate}}</div>
+    <div *ngIf="errUpdateDate!==null" style="color: red">{{errUpdateDate}}</div>
+    <div *ngIf="errNameUpdate!==null" style="color: red">{{errNameUpdate}}</div>
+    <mat-form-field>
+      <input matInput required [(ngModel)]="selectedTask.name" placeholder="Введите название">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput type="date" [ngModel]="selectedTask.dateStart | date:'yyyy-MM-dd'"
+             (ngModelChange)="selectedTask.dateStart = $event" placeholder="Введите время начала задачи">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="date" [ngModel]="selectedTask.realDateEnd | date:'yyyy-MM-dd'"
+             (ngModelChange)="selectedTask.realDateEnd = $event" placeholder="Введите реальное время окончания задачи">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="date" [ngModel]="selectedTask.dateEnd | date:'yyyy-MM-dd'"
+             (ngModelChange)="selectedTask.dateEnd = $event" placeholder="Введите планируемое время окончания задачи">
+    </mat-form-field>
+    <div>
+      <button mat-raised-button (click)="delete(selectedTask)"> delete</button>
+      <button mat-raised-button (click)="update(selectedTask)"> save</button>
+    </div>
+  </div>
+  <div class="created">
+    <div>Создать задание:</div>
+    <div *ngIf="errCreate!==null||errCreate!==undefined" style="color: red">{{errCreate}}</div>
+    <div *ngIf="errName!==null" style="color: red">{{errName}}</div>
+    <div *ngIf="errCreateDate!==null" style="color: red">{{errCreateDate}}</div>
+    <mat-form-field>
+      <input matInput required [(ngModel)]="createdTask.name" placeholder="Введите название">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput required type="date" [(ngModel)]="createdTask.dateStart" placeholder="Введите начало задачи">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput required type="date" [(ngModel)]="createdTask.realDateEnd"
+             placeholder="Введите реальное время окончания">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput required type="date" [(ngModel)]="createdTask.dateEnd"
+             placeholder="Введите планируемое время окончания">
+    </mat-form-field>
+    <button mat-raised-button (click)="save(createdTask)"> add</button>
+  </div>
+
+</div>

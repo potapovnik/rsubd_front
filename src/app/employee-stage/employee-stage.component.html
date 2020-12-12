@@ -1,0 +1,60 @@
+<div class="all" >
+  <div class="part">
+    <mat-action-list *ngFor="let employeeStage of allEmployeeStage" class="listOfEntity" >
+      <button mat-list-item (click)="selectEmployeeStage(employeeStage)" class="buttonInList">
+        {{employeeStage && employeeStage.employee}}-
+        {{employeeStage && employeeStage.stage}}
+      </button>
+    </mat-action-list>
+  </div>
+  <div class="selected">
+    <div>Выбранный работник-этап:</div>
+    <div *ngIf="errUpdate!==null" style="color: red">Необходимо заполнить оба поля</div>
+    <div *ngIf="!saveCheckEmployee">id работника введено неверно</div>
+    <mat-form-field>
+      <mat-select placeholder="Выберете работника" [(ngModel)]="selectedEmployeeStage.employee_id">
+        <mat-option *ngFor="let item of allEmployee" [value]="item.id">
+          {{item.name}} {{item.surname}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div *ngIf="!saveCheckStage">id этапа введено неверно</div>
+    <mat-form-field>
+      <mat-select placeholder="Выберете этап" [(ngModel)]="selectedEmployeeStage.stage_id">
+        <mat-option *ngFor="let items of allStage" [value]="items.id">
+          {{items.nameId}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div>
+      <button mat-raised-button (click)="delete(selectedEmployeeStage)"> delete</button>
+      <button mat-raised-button (click)="update(selectedEmployeeStage)"> save</button>
+    </div>
+  </div>
+  <div class="created">
+    <div>Создать работник - этап:</div>
+
+    <div *ngIf="err!==null" style="color: red">Необходимо заполнить оба поля</div>
+    <div *ngIf="!createCheckEmployee">id работника введено неверно</div>
+    <mat-form-field>
+      <mat-select placeholder="Выберете работника" [(ngModel)]="createdEmployeeStage.employee_id">
+        <mat-option *ngFor="let item of allEmployee" [value]="item.id">
+          {{item.name}} {{item.surname}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div *ngIf="!createCheckStage">id этапа введено неверно</div>
+    <mat-form-field>
+      <mat-select placeholder="Выберете этап" [(ngModel)]="createdEmployeeStage.stage_id">
+        <mat-option *ngFor="let items of allStage" [value]="items.id">
+          {{items.nameId}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div>
+      <button mat-raised-button (click)="save(createdEmployeeStage)"> add</button>
+    </div>
+  </div>
+</div>
